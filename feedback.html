@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Quench Voice Feedback</title>
+    <link rel="stylesheet" href="stylez.css">
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" data-theme="b" class="ui-corner-all ui-content">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false"
+         class="ui-corner-top-right ui-corner-top-left">
+        <h1>Provide Feedback</h1>
+    </div>
+    <form id="voiceFeedback" name="voiceFeedback" method="POST" action="processFeedback.php">
+        <div data-role="main" class="ui-content center"  data-theme="b">
+            <h1>Complete Any Section(s)</h1>
+            <h3>Everything is Optional</h3>
+            <div data-role="collapsibleset">
+                <!--Overall Section-->
+                <fieldset data-role="collapsible">
+                    <legend>Overall Competition</legend>
+                    <ul data-role="listview" data-mini="true" data-inline="true">
+                        <li data-role="fieldcontain">
+                            <label for="overallScore" class="center">Overall Satisfaction</label>
+                            <input id="overallScore" name="overallScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="overallComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="overallComm" name="overallComm" value="" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Competition:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="organizationScore" class="center">Overall Organization of Competition</label>
+                            <input id="organizationScore" name="organizationScore" type="range" min="0" max="100"
+                                   value="50"/>
+                        </li>
+                        <li>
+                            <label for="organizationComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="organizationComm" name="organizationComm" value="" type="text"
+                                   data-clear-btn="true"
+                                   placeholder="Comments On Organization:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="prizeScore" class="center">Rate the Prize Package</label>
+                            <input id="prizeScore" name="prizeScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="prizeComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="prizeComm" name="prizeComm" value="" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Prize Packages:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="fairScore" class="center">Rate the Overall Fairness</label>
+                            <input id="fairScore" name="fairScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="fairComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="fairComm" name="fairComm" value="" type="text" data-clear-btn="true"
+                                   placeholder="Comments About Fairness:"/>
+                        </li>
+                        <li>
+                            <label for="overallSuggestion" class="ui-hidden-accessible">Comments: </label>
+                            <input id="overallSuggestion" name="overallSuggestion" type="text" data-clear-btn="true"
+                                   placeholder="Suggestions to Improve Competition:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="overallRecommend" class="center">Would You Participate Again?</label>
+                            <input id="overallRecommend" name="overallRecommend" type="checkbox" data-role="flipswitch"
+                                   data-on-text="Yes"
+                                   data-off-text="No" class="center"/>
+                        </li>
+                    </ul>
+                </fieldset>
+                <!--Judges Section-->
+                <fieldset data-role="collapsible">
+                    <legend>Judges</legend>
+                    <ul data-role="listview" data-mini="true" data-inline="true">
+                        <li data-role="fieldcontain">
+                            <label for="judgeTotalScore" class="center">Rate Judging Satisfaction</label>
+                            <input id="judgeTotalScore" name="judgeTotalScore" type="range" min="0" max="100"
+                                   value="50"/>
+                        </li>
+                        <li>
+                            <label for="judgeTotalComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="judgeTotalComm" name="judgeTotalComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Judging:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="judgeCommentScore" class="center">Rate Judges Comments</label>
+                            <input id="judgeCommentScore" name="judgeCommentScore" type="range" min="0" max="100"
+                                   value="50"/>
+                        </li>
+                        <li>
+                            <label for="judgeCommentComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="judgeCommentComm" name="judgeCommentComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Judges Comments:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="judgeFairScore" class="center">Rate the Fairness of Judges</label>
+                            <input id="judgeFairScore" name="judgeFairScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="judgeFairComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="judgeFairComm" name="judgeFairComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments ON Judges Fairness:"/>
+                        </li>
+                        <li>
+                            <label for="judgeSuggestion" class="ui-hidden-accessible">Suggestions: </label>
+                            <input id="judgeSuggestion" name="judgeSuggestion" type="text" data-clear-btn="true"
+                                   placeholder="Suggestions to Improve Judging:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="judgeRecommend" class="center">Would You Recommend Same Judges?</label>
+                            <input id="judgeRecommend" name="judgeRecommend" type="checkbox" data-role="flipswitch"
+                                   data-on-text="Yes"
+                                   data-off-text="No" class="center"/>
+                        </li>
+                    </ul>
+                </fieldset>
+                <!--KJ Section-->
+                <fieldset data-role="collapsible">
+                    <legend>KJ</legend>
+                    <ul data-role="listview" data-mini="true" data-inline="true">
+                        <li data-role="fieldcontain">
+                            <label for="kjTotalScore" class="center">Overall Satisfaction</label>
+                            <input id="kjTotalScore" name="kjTotalScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="kjTotalComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="kjTotalComm" name="kjTotalComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On KJ:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for=kjFairScore" class="center">Rate KJ Fairness</label>
+                            <input id=kjFairScore" name="kjFairScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="kjFairComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="kjFairComm" name="kjFairComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On KJ Fairness:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="kjVarietyScore" class="center">Rate KJ Variety</label>
+                            <input id="kjVarietyScore" name="kjVarietyScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="kjVarietyComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="kjVarietyComm" name="kjVarietyComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On KJ Variety:"/>
+                        </li>
+                        <li>
+                            <label for="kjSuggestion" class="ui-hidden-accessible">Comments: </label>
+                            <input id="kjSuggestion" name="kjSuggestion" type="text" data-clear-btn="true"
+                                   placeholder="Suggestions for KJ:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="kjRecommend" class="center">Would You Recommend the KJ?</label>
+                            <input id="kjRecommend" name="kjRecommend" type="checkbox" data-role="flipswitch"
+                                   data-on-text="Yes"
+                                   data-off-text="No" class="center"/>
+                        </li>
+                    </ul>
+                </fieldset>
+                <!--Voting App Section-->
+                <fieldset data-role="collapsible">
+                    <legend>Voting App</legend>
+                    <ul data-role="listview" data-mini="true" data-inline="true">
+                        <li data-role="fieldcontain">
+                            <label for="vaTotalScore" class="center">App Satisfaction</label>
+                            <input id="vaTotalScore" name="vaTotalScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="vaTotalComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="vaTotalComm" name="vaTotalComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Voting App:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="vaEaseScore" class="center">Rate Ease of Use</label>
+                            <input id="vaEaseScore" name="vaEaseScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="vaEaseComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="vaEaseComm" name="vaEaseComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Ease of Use:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="vaFairScore" class="center">Rate the Fairness of App</label>
+                            <input id="vaFairScore" name="vaFairScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="vaFairComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="vaFairComm" name="vaFairComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On App Fairness:"/>
+                        </li>
+                        <li>
+                            <label for="vaSuggestion" class="ui-hidden-accessible">Comments: </label>
+                            <input id="vaSuggestion" name="vaSuggestion" type="text" data-clear-btn="true"
+                                   placeholder="Suggestions to Improve App:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="vaRecommend" class="center">Would You Recommend Voting App?</label>
+                            <input id="vaRecommend" name="vaRecommend" type="checkbox" data-role="flipswitch"
+                                   data-on-text="Yes"
+                                   data-off-text="No" class="right"/>
+                        </li>
+                    </ul>
+                </fieldset>
+                <!--Bar Section-->
+                <fieldset data-role="collapsible">
+                    <legend>Quench Lounge</legend>
+                    <ul data-role="listview" data-mini="true" data-inline="true">
+                        <li data-role="fieldcontain">
+                            <label for="barTotalScore" class="center">Quench Satisfaction</label>
+                            <input id="barTotalScore" name="barTotalScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="barTotalComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="barTotalComm" name="barTotalComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments on Quench:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="barAtmosScore" class="center">Rate Atmosphere</label>
+                            <input id="barAtmosScore" name="barAtmosScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="barAtmosComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="barAtmosComm" name="barAtmosComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments on Atmosphere:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="barTenderScore" class="center">Rate Bartenders</label>
+                            <input id="barTenderScore" name="barTenderScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="barTenderComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="barTenderComm" name="barTenderComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments on Bartenders:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="barPricesScore" class="center">Rate Drink Prices</label>
+                            <input id="barPricesScore" name="barPricesScore" type="range" min="0" max="100" value="50"/>
+                        </li>
+                        <li>
+                            <label for="barPricesComm" class="barPricesComm">Comments: </label>
+                            <input id="barPricesComm" name="barPricesComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Drink Prices:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="barQualityScore" class="center">Rate Drink Quality</label>
+                            <input id="barQualityScore" name="barQualityScore" type="range" min="0" max="100"
+                                   value="50"/>
+                        </li>
+                        <li>
+                            <label for="barQualityComm" class="ui-hidden-accessible">Comments: </label>
+                            <input id="barQualityComm" name="barQualityComm" type="text" data-clear-btn="true"
+                                   placeholder="Comments On Drink Quality:"/>
+                        </li>
+                        <li>
+                            <label for="barSuggestion" class="ui-hidden-accessible">Comments: </label>
+                            <input id="barSuggestion" name="barSuggestion" type="text" data-clear-btn="true"
+                                   placeholder="Suggestions to Improve Quench:"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="barRecommend" class="center">Would You Recommend Quench?</label>
+                            <input id="barRecommend" name="barRecommend" type="checkbox" data-role="flipswitch"
+                                   data-on-text="Yes"
+                                   data-off-text="No" class="center"/>
+                        </li>
+                    </ul>
+                </fieldset>
+                <!--Demos Section-->
+                <fieldset data-role="collapsible">
+                    <legend>Extremely Optional But Useful Info</legend>
+                    <ul data-role="listview" data-mini="true" data-inline="true">
+                        <li data-role="fieldcontain">
+                            <label for="demosAge" class="center">Your Age</label>
+                            <input id="demosAge" name="demosAge" type="range" min="21" max="100" value="100"/>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="demosGender" class="center">Gender: </label>
+                            <select id="demosGender" name="demosGender" class="ui-btn-a">
+
+                                <option class="ui-btn ui-corner-all center" id="male" value="male" data-theme="a">
+                                    Male
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="female" value="female" data-theme="a">
+                                    Female
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="transgender" value="transgender"
+                                        data-inline="true">Transgender
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="questioning" value="questioning"
+                                        data-inline="true">Questioning
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="gUndecided" value="gUndecided"
+                                        data-inline="true">Undecided
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="gOther" value="gOther" data-inline="true">
+                                    Other
+                                </option>
+
+                            </select>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="demosOrientation" class="center">Choose Your Sexual Orientation</label>
+                            <select id="demosOrientation" name="demosOrientation" class="ui-btn-a">
+                                <option class="ui-btn ui-corner-all" id="gay" value="gay" data-inline="true">Gay Man
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="lesbian" value="lesbian" data-inline="true">
+                                    Lesbian
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="straight" value="straight" data-inline="true">
+                                    Straight
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="bi" value="bi" data-inline="true">Bisexual
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="assexual" value="assexual" data-inline="true">
+                                    Assexual
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="pansexual" value="pansexual"
+                                        data-inline="true">Pansexual
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="soUndecided" value="soUndecided"
+                                        data-inline="true">Undecided
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="soOther" value="soOther" data-inline="true">
+                                    Other
+                                </option>
+
+                            </select>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="demosParticipate" class="center">How Did You Participate</label>
+                            <select id="demosParticipate" name="demosParticipate" class="ui-btn-a">
+                                <option class="ui-btn ui-corner-all" id="contestant" value="contestant"
+                                        data-inline="true">I Was a
+                                    Contestant
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="representative" value="reprsentative"
+                                        data-inline="true">I am a Representative of the contest or Quench
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="support" value="support" data-inline="true">I
+                                    Was Supporting a
+                                    Friend
+                                </option>
+                                <option class="ui-btn ui-corner-all" id="patron" value="patron" data-inline="true">I Was
+                                    a Patron
+                                </option>
+                            </select>
+                        </li>
+
+                    </ul>
+                </fieldset>
+            </div>
+        </div>
+        <div id="footer" data-role="footer" data-position="fixed" data-tap-toggle="false"
+             class="ui-corner-bottom-right ui-corner-top-right ui-grid-b ui-content">
+            <div class="ui-block-a">
+                <label for="emailAddress" class="ui-hidden-accessible"></label>
+                <input id="emailAddress" name="emailAddress" type="email" placeholder="yourEmail@wherever.com"/>
+            </div>
+            <div class="ui-block-b">
+                <label for="emailList" class="center">Join Quench E-Mail List</label>
+                <input id="emailList" name='emailList' type="checkbox" class='center' data-role="flipswitch"
+                       data-on-text="Yes" data-off-text="No"/>
+            </div>
+            <div class="ui-block-c">
+                <button class="ui-btn ui-corner-all" value="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#voiceFeedback").submit(function (event) {
+            event.preventDefault();
+            var formData = $('#voiceFeedback').serialize();
+            console.log(formData);
+            var sent = $.post('processFeedback.php', formData);
+            sent.done(function (data) {
+                $('#footer').html("<h3 class='ui-block-a'>Survey Succesfully Submited <br> Thank You For Your Time</h3>" +
+                        "<a href='http://www.quenchlounge.com' class='ui-btn ui-corner-all'>QuenchLounge.com</a>" +
+                        "<a href='http://www.facebook.com' class='ui-btn ui-corner-all'>Facebook.com</a>")
+            });
+            sent.fail(function (data) {
+                console.log("failure:  " + data);
+            });
+        });
+
+    });
+</script>
+
+</body>
+</html>
